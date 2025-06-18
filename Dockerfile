@@ -32,8 +32,8 @@ COPY . .
 EXPOSE 8000
 
 # Define environment variable for the port (Cloud Run sets this)
-ENV PORT 8000 
-# ENV AIPIPE_TOKEN your_token_here # Better to set this in Cloud Run service config
+ENV PORT=8000 
+# ENV AIPIPE_TOKEN=eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjI0ZjEwMDA4ODRAZHMuc3R1ZHkuaWl0bS5hYy5pbiJ9.aRgdRRthCJtUP7bqHiOLKqOaTByfP4Ib9VJZkqfSpR8 
 
 # Command to run your application using uvicorn
 # Cloud Run expects the app to listen on 0.0.0.0 and the port specified by $PORT
