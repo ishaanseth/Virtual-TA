@@ -1,6 +1,7 @@
 # main.py
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 import json
@@ -115,6 +116,21 @@ class AnswerResponse(BaseModel):
 
 
 app = FastAPI()
+origins = [
+    "*",  # Allows all origins
+    # If you want to be more restrictive, you can list specific origins:
+    # "http://localhost",
+    # "http://localhost:xxxx", # If promptfoo runs a local web UI for viewing
+    # "https://your-promptfoo-viewer-domain.com", # If applicable
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins, # List of origins that are allowed to make cross-origin requests
+    allow_credentials=True, # Allows cookies to be included in cross-origin requests
+    allow_methods=["*"],    # Allows all methods (GET, POST, PUT, DELETE, OPTIONS, etc.)
+    allow_headers=["*"],    # Allows all headers
+)
 
 
 def get_embedding(text_to_embed: str):
